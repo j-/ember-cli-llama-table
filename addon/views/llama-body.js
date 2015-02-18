@@ -10,6 +10,7 @@ var LlamaBody = Em.CollectionView.extend(ScrollXYMixin, {
 	content: Em.computed.alias('controller.columngroups'),
 	itemViewClass: Em.computed.alias('controller.BodyColumngroupView'),
 	columngroupViews: Em.computed.alias('childViews'),
+	maxHeight: Em.computed.alias('controller.config.maxHeight'),
 
 	createChildView: function (View, attrs) {
 		var columns = get(attrs, 'content');
@@ -34,6 +35,10 @@ var LlamaBody = Em.CollectionView.extend(ScrollXYMixin, {
 			controller.copy(e.target);
 		}
 	},
+
+	setMaxHeight: function () {
+		this.$().css('max-height', this.get('maxHeight'));
+	}.on('didInsertElement').observes('maxHeight'),
 
 	actions: {
 		scrollX: function (pos) {

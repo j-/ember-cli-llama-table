@@ -146,6 +146,7 @@ var IndexController = Em.Controller.extend({
 	],
 	config: {
 		sortProperties: ['episode'],
+		maxHeight: 250,
 		types: [
 			{
 				name: 'remove',
