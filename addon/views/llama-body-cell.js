@@ -8,6 +8,7 @@ var removeObserver = Em.removeObserver;
 var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 	templateName: 'llama-body-cell',
 	classNames: 'llama-body-cell',
+	classNameBindings: ['isEmpty'],
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
 
@@ -16,6 +17,9 @@ var LlamaBodyCell = LlamaCell.extend(ArrowKeysMixin, {
 
 	// table definition
 	row: null,
+
+	notEmpty: Em.computed.notEmpty('value'),
+	isEmpty: Em.computed.not('notEmpty'),
 
 	// only calculated once
 	observedFields: function () {
