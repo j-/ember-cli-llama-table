@@ -4,6 +4,9 @@ var set = Em.set;
 var get = Em.get;
 
 var IndexController = Em.Controller.extend({
+
+	/* Table definition */
+
 	tableColumns: [
 		{
 			name: 'episode',
@@ -150,6 +153,27 @@ var IndexController = Em.Controller.extend({
 			}
 		]
 	},
+
+	/* Table configuration */
+
+	metaColumns: [
+		{ order:  1, width: 200, name: 'name' },
+		{ order:  2, width: 200, name: 'label' },
+		{ order:  3, width: 100, name: 'order' },
+		{ order:  4, width: 100, name: 'type' },
+		{ order:  5, width: 100, name: 'minWidth' },
+		{ order:  6, width: 100, name: 'width' },
+		{ order:  7, width: 100, name: 'maxWidth' },
+		{ order:  8, width: 100, name: 'isSortable' },
+		{ order:  9, width: 100, name: 'isEditable' },
+		{ order: 10, width: 100, name: 'isHidden' },
+		{ order: 11, width: 100, name: 'isFixed' },
+		{ order: 12, width: 100, name: 'isResizable' },
+		{ order: 13, width: 100, name: 'isClickable' }
+	],
+
+	/* Actions */
+
 	events: Em.A(),
 	actions: {
 		addColumn: function () {

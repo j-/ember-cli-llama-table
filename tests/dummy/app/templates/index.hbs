@@ -10,6 +10,13 @@
 	cellClick="cellClick"
 }}
 
+<h4>Config</h4>
+
+{{llama-table
+	rows=tableColumns
+	columns=metaColumns
+}}
+
 <h4>Actions</h4>
 
 <button {{action 'addColumn'}}>Add new column</button>
