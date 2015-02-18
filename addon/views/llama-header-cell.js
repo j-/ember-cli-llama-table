@@ -7,7 +7,15 @@ var LlamaHeaderCell = LlamaCell.extend({
 	classNames: 'llama-header-cell',
 	classNameBindings: ['sortByThis', 'sortByThisAscending', 'sortByThisDescending', 'isSortable'],
 	attributeBindings: ['title'],
-	title: Em.computed.alias('column.label'),
+	title: Em.computed.alias('label'),
+
+	label: function () {
+		var label = this.get('column.label');
+		if (Em.isBlank(label)) {
+			label = this.get('column.name');
+		}
+		return label;
+	}.property('column.label', 'column.name'),
 
 	isSortable: defaultValue('column.isSortable', true),
 	isResizable: defaultValue('column.isResizable', true),
