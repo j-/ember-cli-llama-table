@@ -171,6 +171,9 @@ var IndexController = Em.Controller.extend({
 		{ order: 12, width: 100, name: 'isResizable' },
 		{ order: 13, width: 100, name: 'isClickable' }
 	],
+	metaConfig: {
+		sortProperties: ['order']
+	},
 
 	/* Actions */
 
