@@ -7,18 +7,41 @@ var isBlank = Em.isBlank;
 var makeArray = Em.makeArray;
 
 /**
+ * Slice an array-like object.
+ * @param {*} arr Objects like arrays, arguments, HTMLCollections etc
+ * @param {Number} [start=0] Start index to begin slice
+ * @param {Number} [end=arr.length] Index to end slice
+ * @return {Array} New slice
+ */
+var slice = function (arr, start, end) {
+	return Array.prototype.slice.call(arr, start, end);
+};
+
+/**
+ * Make a computed property.
+ * @param {String[]} keys Dependent key names
+ * @param {Function} fn Definition function
+ * @return {Ember.Descriptor} New computed property
+ */
+var makeComputed = function (keys, fn) {
+	var args = slice(keys);
+	args.push(fn);
+	return computed.apply(null, args);
+};
+
+/**
  * Get the value of a descriptor or other data type.
  * @param {*} val Value to test
  * @param {Array} args Optional arguments to send to item if descriptor.
  * @return {*} Result of computation if descriptor, input value otherwise
  */
-var getValue = function (val, args) {
+var getValue = function (context, val, args) {
 	if (isDescriptor(val)) {
 		if (!isEmpty(val.altKey)) {
-			return get(this, val.altKey);
+			return get(context, val.altKey);
 		}
 		else {
-			return val.func.apply(this, args);
+			return val.func.apply(context, args);
 		}
 	}
 	return val;
@@ -49,17 +72,6 @@ var getDependentKeys = function (keys) {
 		}
 	});
 	return result.compact().uniq();
-};
-
-/**
- * Slice an array-like object.
- * @param {*} arr Objects like arrays, arguments, HTMLCollections etc
- * @param {Number} [start=0] Start index to begin slice
- * @param {Number} [end=arr.length] Index to end slice
- * @return {Array} New slice
- */
-var slice = function (arr, start, end) {
-	return Array.prototype.slice.call(arr, start, end);
 };
 
 export var defaultValue = function (watchKey, defaultValue) {
@@ -96,18 +108,39 @@ export var fmt = function (pattern) {
 	var vals = slice(arguments, 1);
 	var descriptors = Em.A(vals).filter(isDescriptor);
 	var keys = getDependentKeys(descriptors);
-	return computed(keys, function () {
+	return makeComputed(keys, function () {
 		var computedArgs = slice(arguments);
 		var formatArgs = vals.map(function (val) {
-			return getValue.call(this, val, computedArgs);
+			return getValue(this, val, computedArgs);
 		}, this);
 		formatArgs.unshift(pattern);
 		return Em.String.fmt.call(null, formatArgs);
 	});
 };
 
+export var iif = function (condition, trueValue, falseValue) {
+	var keys = getDependentKeys(condition, trueValue, falseValue);
+	return makeComputed(keys, function () {
+		return getValue(this, condition) ?
+			getValue(this, trueValue) :
+			getValue(this, falseValue);
+	});
+};
+
+export var compact = function () {
+	var args = slice(arguments);
+	var keys = getDependentKeys.call(null, args);
+	return makeComputed(keys, function () {
+		return args.map(function (arg) {
+			return getValue(this, arg);
+		}, this).compact();
+	});
+};
+
 export default {
 	defaultValue: defaultValue,
 	join: join,
-	fmt: fmt
+	fmt: fmt,
+	iif: iif,
+	compact: compact
 };
