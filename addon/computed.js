@@ -64,7 +64,10 @@ var isDescriptor = function (val) {
 var getDependentKeys = function (keys) {
 	var result = Em.A();
 	makeArray(keys).forEach(function (item) {
-		if (typeof item === 'string') {
+		if (Em.isNone(item)) {
+			// skip
+		}
+		else if (typeof item === 'string') {
 			result.pushObject(item);
 		}
 		else if (typeof item._dependentKeys !== 'undefined') {
