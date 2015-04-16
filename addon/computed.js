@@ -24,7 +24,7 @@ var slice = function (arr, start, end) {
  * @return {Ember.Descriptor} New computed property
  */
 var makeComputed = function (keys, fn) {
-	var args = slice(keys);
+	var args = makeArray(keys);
 	args.push(fn);
 	return computed.apply(null, args);
 };
