@@ -5,16 +5,26 @@ var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
 var collect = computed.collect;
+var and = computed.and;
+var not = computed.not;
 
 var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 	classNames: ['llama-body'],
 	isEmpty: alias('controller.isEmpty'),
 	isLoading: alias('controller.isLoading'),
+	notLoading: not('controller.isLoading'),
 	scrollLeft: alias('controller.scrollLeft'),
 	scrollTop: alias('controller.scrollTop'),
+
 	childViews: compact(
+		// always show content
 		alias('contentView'),
-		iif(alias('controller.hasSubcontent'), alias('subcontentView'))
+		// only show subcontent if this table has subcontent
+		iif(alias('controller.hasSubcontent'), alias('subcontentView')),
+		// show empty message if no records and not loading
+		iif(and('isEmpty', 'notLoading'), alias('emptyView')),
+		// show loading message if no records and loading
+		iif(and('isEmpty', 'isLoading'), alias('loadingView'))
 	),
 
 	columngroups: null,
@@ -44,24 +54,6 @@ var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 		var View = this.get('controller.LoadingView');
 		return this.createChildView(View, {});
 	}),
-
-	toggleEmpty: observer('isEmpty', 'isLoading', function () {
-		var isEmpty = this.get('isEmpty');
-		var isLoading = this.get('isLoading');
-		var emptyView = this.get('emptyView');
-		var loadingView = this.get('loadingView');
-		if (!isEmpty) {
-			this.removeObjects([emptyView, loadingView]);
-		}
-		else if (isLoading) {
-			this.removeObject(emptyView);
-			this.pushObject(loadingView);
-		}
-		else {
-			this.removeObject(loadingView);
-			this.pushObject(emptyView);
-		}
-	}).on('init'),
 
 	updateScrollPosition: observer('didInsertElement', function () {
 		var $body = this.$();
