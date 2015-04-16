@@ -122,7 +122,7 @@ export var fmt = function (pattern) {
 };
 
 export var iif = function (condition, trueValue, falseValue) {
-	var keys = getDependentKeys(condition, trueValue, falseValue);
+	var keys = getDependentKeys([condition, trueValue, falseValue]);
 	return makeComputed(keys, function () {
 		return getValue(this, condition) ?
 			getValue(this, trueValue) :
@@ -132,7 +132,7 @@ export var iif = function (condition, trueValue, falseValue) {
 
 export var compact = function () {
 	var args = slice(arguments);
-	var keys = getDependentKeys.call(null, args);
+	var keys = getDependentKeys(args);
 	return makeComputed(keys, function () {
 		return args.map(function (arg) {
 			return getValue(this, arg);
