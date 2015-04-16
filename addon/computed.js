@@ -99,7 +99,7 @@ export var fmt = function (pattern) {
 	return computed(keys, function () {
 		var computedArgs = slice(arguments);
 		var formatArgs = vals.map(function (val) {
-			return getValue.call(this, computedArgs);
+			return getValue.call(this, val, computedArgs);
 		}, this);
 		formatArgs.unshift(pattern);
 		return Em.String.fmt.call(null, formatArgs);
