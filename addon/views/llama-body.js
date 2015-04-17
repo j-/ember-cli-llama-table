@@ -16,7 +16,7 @@ var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 	scrollLeft: alias('controller.scrollLeft'),
 	scrollTop: alias('controller.scrollTop'),
 
-	childViews: compact(
+	dynamicChildViews: compact(
 		// always show content
 		alias('contentView'),
 		// only show subcontent if this table has subcontent
@@ -29,6 +29,15 @@ var LlamaBody = Em.ContainerView.extend(ScrollXYMixin, {
 
 	columngroups: null,
 	rows: null,
+
+	updateChildViews: observer('dynamicChildViews', function () {
+		while (this.get('childViews.length')) {
+			this.popObject();
+		}
+		this.get('dynamicChildViews').forEach(function (view) {
+			this.pushObject(view);
+		}, this);
+	}).on('init'),
 
 	contentView: computed(function () {
 		var View = this.get('controller.ContentView');
