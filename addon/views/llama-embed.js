@@ -45,8 +45,10 @@ var LlamaEmbed = Em.ContainerView.extend({
 	}).on('didInsertElement'),
 
 	subcontentView: computed(function () {
-		var View = this.get('controller.config.subcontentView');
+		var controller = this.get('controller');
+		var View = controller.get('config.subcontentView');
 		return this.createChildView(View, {
+			controller: controller,
 			content: this.get('content')
 		});
 	}),

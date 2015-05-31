@@ -264,6 +264,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	tableView: computed(function () {
 		var TableView = this.get('TableView');
 		return this.createChildView(TableView, {
+			controller: this,
 			columngroups: this.get('columngroups'),
 			rows: this.get('sortedRows')
 		});

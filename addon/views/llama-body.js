@@ -12,28 +12,38 @@ var LlamaBody = Em.ContainerView.extend({
 	rows: null,
 
 	contentView: computed(function () {
-		var View = this.get('controller.ContentView');
+		var controller = this.get('controller');
+		var View = controller.get('ContentView');
 		return this.createChildView(View, {
+			controller: controller,
 			columngroups: this.get('columngroups'),
 			rows: this.get('rows')
 		});
 	}),
 
 	subcontentView: computed(function () {
-		var View = this.get('controller.SubcontentView');
+		var controller = this.get('controller');
+		var View = controller.get('SubcontentView');
 		return this.createChildView(View, {
+			controller: controller,
 			rows: this.get('rows')
 		});
 	}),
 
 	emptyView: computed(function () {
-		var View = this.get('controller.EmptyView');
-		return this.createChildView(View, {});
+		var controller = this.get('controller');
+		var View = controller.get('EmptyView');
+		return this.createChildView(View, {
+			controller: controller
+		});
 	}),
 
 	loadingView: computed(function () {
-		var View = this.get('controller.LoadingView');
-		return this.createChildView(View, {});
+		var controller = this.get('controller');
+		var View = controller.get('LoadingView');
+		return this.createChildView(View, {
+			controller: controller
+		});
 	}),
 
 	init: function () {
