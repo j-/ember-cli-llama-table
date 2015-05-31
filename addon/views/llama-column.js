@@ -41,6 +41,7 @@ var LlamaColumn = Em.CollectionView.extend({
 	cellViews: alias('childViews'),
 
 	createChildView: function (View, attrs) {
+		attrs = attrs || {};
 		var column = this.get('column');
 		set(attrs, 'column', column);
 		return this._super(View, attrs);

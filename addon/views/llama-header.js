@@ -14,6 +14,7 @@ var LlamaHeader = Em.CollectionView.extend({
 	columngroups: null,
 
 	createChildView: function (View, attrs) {
+		attrs = attrs || {};
 		var columns = get(attrs, 'content');
 		set(attrs, 'columns', columns);
 		return this._super(View, attrs);

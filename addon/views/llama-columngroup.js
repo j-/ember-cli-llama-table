@@ -34,6 +34,7 @@ var LlamaColumngroup = Em.CollectionView.extend({
 	}).on('didInsertElement'),
 
 	createChildView: function (View, attrs) {
+		attrs = attrs || {};
 		var columns = this.get('columns');
 		var column = get(attrs, 'content');
 		set(attrs, 'columns', columns);

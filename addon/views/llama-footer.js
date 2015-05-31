@@ -30,6 +30,7 @@ var LlamaFooter = Em.CollectionView.extend({
 	}),
 
 	createChildView: function (View, attrs) {
+		attrs = attrs || {};
 		var data = this.get('data');
 		var columns = get(attrs, 'content');
 		set(attrs, 'columns', columns);

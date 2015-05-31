@@ -10,6 +10,7 @@ var LlamaBodyColumngroup = LlamaColumngroup.extend({
 	rows: null,
 
 	createChildView: function (View, attrs) {
+		attrs = attrs || {};
 		var rows = this.get('rows');
 		set(attrs, 'rows', rows);
 		return this._super(View, attrs);

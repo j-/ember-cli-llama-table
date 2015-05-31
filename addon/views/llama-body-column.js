@@ -20,6 +20,7 @@ var LlamaBodyColumn = LlamaColumn.extend({
 	}),
 
 	createChildView: function (View, attrs) {
+		attrs = attrs || {};
 		var row = get(attrs, 'content');
 		set(attrs, 'row', row);
 		return this._super(View, attrs);

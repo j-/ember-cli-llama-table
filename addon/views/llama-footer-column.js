@@ -19,6 +19,7 @@ var LlamaFooterColumn = LlamaColumn.extend({
 	}),
 
 	createChildView: function (View, attrs) {
+		attrs = attrs || {};
 		var data = this.get('data');
 		var column = this.get('column');
 		set(attrs, 'row', data);
