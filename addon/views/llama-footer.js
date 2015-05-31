@@ -15,18 +15,20 @@ var LlamaFooter = Em.CollectionView.extend({
 	columngroups: null,
 	rows: null,
 
-	data: computed('controller.footerController', function (key, val, old) {
-		if (old) {
-			old.destroy();
+	data: computed('controller.footerController', {
+		get: function (key, val, old) {
+			if (old) {
+				old.destroy();
+			}
+			var Constructor = this.get('controller.footerController');
+			var instance;
+			if (typeof Constructor === 'function') {
+				instance = Constructor.create({
+					content: this.get('rows')
+				});
+			}
+			return instance;
 		}
-		var Constructor = this.get('controller.footerController');
-		var instance;
-		if (typeof Constructor === 'function') {
-			instance = Constructor.create({
-				content: this.get('rows')
-			});
-		}
-		return instance;
 	}),
 
 	createChildView: function (View, attrs) {

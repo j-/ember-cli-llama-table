@@ -4,10 +4,12 @@ var computed = Em.computed;
 
 var LlamaNumberCell = LlamaBodyCell.extend({
 	classNames: 'number',
-	formatted: computed('value', function () {
-		var value = this.get('value');
-		var number = Number(value);
-		return number;
+	formatted: computed('value', {
+		get: function () {
+			var value = this.get('value');
+			var number = Number(value);
+			return number;
+		}
 	})
 });
 

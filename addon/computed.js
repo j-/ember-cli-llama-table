@@ -5,9 +5,8 @@ var set = Em.set;
 var isBlank = Em.isBlank;
 
 export var defaultValue = function (watchKey, defaultValue) {
-	return computed(watchKey, function (setKey, value) {
-		// setter
-		if (arguments.length > 1) {
+	return computed(watchKey, {
+		set: function (setKey, value) {
 			try {
 				set(this, watchKey, value);
 			}
@@ -15,10 +14,11 @@ export var defaultValue = function (watchKey, defaultValue) {
 				// swallow
 			}
 			return value;
+		},
+		get: function () {
+			var value = get(this, watchKey);
+			return isBlank(value) ? defaultValue : value;
 		}
-		// getter
-		value = get(this, watchKey);
-		return isBlank(value) ? defaultValue : value;
 	});
 };
 
@@ -26,11 +26,13 @@ export var join = function (watchKey, separator) {
 	if (arguments.length < 2) {
 		separator = ',';
 	}
-	return computed(watchKey, function () {
-		var value = Em.makeArray(this.get(watchKey));
-		var strings = value.map(String);
-		var result = strings.join(separator);
-		return result;
+	return computed(watchKey, {
+		get: function () {
+			var value = Em.makeArray(this.get(watchKey));
+			var strings = value.map(String);
+			var result = strings.join(separator);
+			return result;
+		}
 	});
 };
 

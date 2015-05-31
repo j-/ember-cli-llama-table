@@ -15,32 +15,38 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 	rows: null,
 	columngroups: null,
 
-	headerView: computed(function () {
-		var controller = this.get('controller');
-		var View = controller.get('HeaderView');
-		return this.createChildView(View, {
-			controller: controller,
-			columngroups: this.get('columngroups')
-		});
+	headerView: computed({
+		get: function () {
+			var controller = this.get('controller');
+			var View = controller.get('HeaderView');
+			return this.createChildView(View, {
+				controller: controller,
+				columngroups: this.get('columngroups')
+			});
+		}
 	}),
 
-	dualHeaderView: computed(function () {
-		var controller = this.get('controller');
-		var View = controller.get('HeaderView');
-		return this.createChildView(View, {
-			controller: controller,
-			columngroups: this.get('columngroups')
-		});
+	dualHeaderView: computed({
+		get: function () {
+			var controller = this.get('controller');
+			var View = controller.get('HeaderView');
+			return this.createChildView(View, {
+				controller: controller,
+				columngroups: this.get('columngroups')
+			});
+		}
 	}),
 
-	bodyView: computed(function () {
-		var controller = this.get('controller');
-		var View = controller.get('BodyView');
-		return this.createChildView(View, {
-			controller: controller,
-			columngroups: this.get('columngroups'),
-			rows: this.get('rows')
-		});
+	bodyView: computed({
+		get: function () {
+			var controller = this.get('controller');
+			var View = controller.get('BodyView');
+			return this.createChildView(View, {
+				controller: controller,
+				columngroups: this.get('columngroups'),
+				rows: this.get('rows')
+			});
+		}
 	}),
 
 	footerView: null,

@@ -16,12 +16,14 @@ var LlamaHeaderCell = LlamaCell.extend({
 
 	column: null,
 
-	title: computed('column.label', function () {
-		var label = this.get('column.label');
-		if (Em.isBlank(label)) {
-			label = this.get('column.name');
+	title: computed('column.label', {
+		get: function () {
+			var label = this.get('column.label');
+			if (Em.isBlank(label)) {
+				label = this.get('column.name');
+			}
+			return label;
 		}
-		return label;
 	}),
 
 	tableIsSortable: defaultValue('controller.isSortable', true),
@@ -35,10 +37,12 @@ var LlamaHeaderCell = LlamaCell.extend({
 	sortAscending: bool('controller.sortAscending'),
 	sortDescending: not('sortAscending'),
 
-	sortByThis: computed('sortProperties.firstObject', 'column.name', function () {
-		var sortBy = this.get('sortProperties.firstObject');
-		var thisColumn = this.get('column.name');
-		return sortBy === thisColumn;
+	sortByThis: computed('sortProperties.firstObject', 'column.name', {
+		get: function () {
+			var sortBy = this.get('sortProperties.firstObject');
+			var thisColumn = this.get('column.name');
+			return sortBy === thisColumn;
+		}
 	}),
 
 	sortByThisAscending: and('sortByThis', 'sortAscending'),
