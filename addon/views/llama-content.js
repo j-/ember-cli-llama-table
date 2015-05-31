@@ -22,14 +22,14 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 
 	copyController: CopyController.create(),
 
-	createChildView: function (View, attrs) {
-		attrs = attrs || {};
-		var rows = this.get('rows');
-		var columns = get(attrs, 'content');
-		set(attrs, 'rows', rows);
-		set(attrs, 'columns', columns);
-		return this._super(View, attrs);
-	},
+	// createChildView: function (View, attrs) {
+	// 	attrs = attrs || {};
+	// 	var rows = this.get('rows');
+	// 	var columns = get(attrs, 'content');
+	// 	set(attrs, 'rows', rows);
+	// 	set(attrs, 'columns', columns);
+	// 	return this._super(View, attrs);
+	// },
 
 	handleTabKey: function (e) {
 		e.preventDefault();

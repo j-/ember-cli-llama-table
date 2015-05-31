@@ -37,6 +37,8 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	classNames: ['llama-table-component'],
 	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'isLoading', 'hasSubcontent', 'showHeader', 'showFooter'],
 
+	layoutName: 'llama-table',
+
 	/**
 	 * Column definitions array
 	 * @property {Object[]} columns
@@ -267,16 +269,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 	 * Table view. Contains header and footer.
 	 * @property {Ember.View} tableView
 	 */
-	tableView: computed({
-		get: function () {
-			var TableView = this.get('TableView');
-			return this.createChildView(TableView, {
-				controller: this,
-				columngroups: this.get('columngroups'),
-				rows: this.get('sortedRows')
-			});
-		}
-	}),
+	tableView: alias('childViews.firstObject'),
 
 	/**
 	 * Header container view.
@@ -344,16 +337,6 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			columns.pushObjects(columnViews);
 		});
 		return columns;
-	},
-
-	/**
-	 * Custom render function which appends table view to component element.
-	 * @method render
-	 */
-	render: function () {
-		var tableView = this.get('tableView');
-		this.appendChild(tableView);
-		tableView.render.apply(tableView, arguments);
 	},
 
 	/**

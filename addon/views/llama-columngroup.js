@@ -35,14 +35,14 @@ var LlamaColumngroup = Em.CollectionView.extend({
 		$columngroup.width(width);
 	}).on('didInsertElement'),
 
-	createChildView: function (View, attrs) {
-		attrs = attrs || {};
-		var columns = this.get('columns');
-		var column = get(attrs, 'content');
-		set(attrs, 'columns', columns);
-		set(attrs, 'column', column);
-		return this._super(View, attrs);
-	}
+	// createChildView: function (View, attrs) {
+	// 	attrs = attrs || {};
+	// 	var columns = this.get('columns');
+	// 	var column = get(attrs, 'content');
+	// 	set(attrs, 'columns', columns);
+	// 	set(attrs, 'column', column);
+	// 	return this._super(View, attrs);
+	// }
 });
 
 export default LlamaColumngroup;

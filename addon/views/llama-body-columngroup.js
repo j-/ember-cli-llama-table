@@ -9,12 +9,12 @@ var LlamaBodyColumngroup = LlamaColumngroup.extend({
 	columns: null,
 	rows: null,
 
-	createChildView: function (View, attrs) {
-		attrs = attrs || {};
-		var rows = this.get('rows');
-		set(attrs, 'rows', rows);
-		return this._super(View, attrs);
-	}
+	// createChildView: function (View, attrs) {
+	// 	attrs = attrs || {};
+	// 	var rows = this.get('rows');
+	// 	set(attrs, 'rows', rows);
+	// 	return this._super(View, attrs);
+	// }
 });
 
 export default LlamaBodyColumngroup;

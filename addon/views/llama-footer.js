@@ -31,14 +31,14 @@ var LlamaFooter = Em.CollectionView.extend({
 		}
 	}),
 
-	createChildView: function (View, attrs) {
-		attrs = attrs || {};
-		var data = this.get('data');
-		var columns = get(attrs, 'content');
-		set(attrs, 'columns', columns);
-		set(attrs, 'data', data);
-		return this._super(View, attrs);
-	},
+	// createChildView: function (View, attrs) {
+	// 	attrs = attrs || {};
+	// 	var data = this.get('data');
+	// 	var columns = get(attrs, 'content');
+	// 	set(attrs, 'columns', columns);
+	// 	set(attrs, 'data', data);
+	// 	return this._super(View, attrs);
+	// },
 
 	updateScrollPosition: observer('scrollTop', function () {
 		var $footer = Em.$(this.$());

@@ -14,12 +14,12 @@ var LlamaSubcontent = Em.CollectionView.extend({
 	itemViewClass: alias('controller.EmbedView'),
 	expandedRows: filterBy('rows', 'isExpanded'),
 
-	createChildView: function (View, attrs) {
-		attrs = attrs || {};
-		var row = get(attrs, 'content');
-		set(attrs, 'row', row);
-		return this._super(View, attrs);
-	}
+	// createChildView: function (View, attrs) {
+	// 	attrs = attrs || {};
+	// 	var row = get(attrs, 'content');
+	// 	set(attrs, 'row', row);
+	// 	return this._super(View, attrs);
+	// }
 });
 
 export default LlamaSubcontent;

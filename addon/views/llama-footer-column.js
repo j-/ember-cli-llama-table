@@ -20,15 +20,15 @@ var LlamaFooterColumn = LlamaColumn.extend({
 		}
 	}),
 
-	createChildView: function (View, attrs) {
-		attrs = attrs || {};
-		var data = this.get('data');
-		var column = this.get('column');
-		set(attrs, 'row', data);
-		set(attrs, 'column', column);
-		set(attrs, 'isFooter', true);
-		return this._super(View, attrs);
-	},
+	// createChildView: function (View, attrs) {
+	// 	attrs = attrs || {};
+	// 	var data = this.get('data');
+	// 	var column = this.get('column');
+	// 	set(attrs, 'row', data);
+	// 	set(attrs, 'column', column);
+	// 	set(attrs, 'isFooter', true);
+	// 	return this._super(View, attrs);
+	// },
 
 	init: function () {
 		// override default assignment of `content` property
