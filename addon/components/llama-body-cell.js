@@ -16,7 +16,7 @@ var ESC = 27;
 var SPACE = 32;
 
 var LlamaBodyCell = LlamaCell.extend({
-	templateName: 'llama-body-cell',
+	layoutName: 'llama-body-cell',
 	classNames: 'llama-body-cell',
 	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable', 'isEmpty', 'showingSubcontent', 'isEditable'],
 	attributeBindings: ['tabindex'],
