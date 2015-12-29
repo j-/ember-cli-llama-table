@@ -5,7 +5,8 @@ var computed = Em.computed;
 var alias = computed.alias;
 var bool = computed.bool;
 
-var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
+var LlamaTable = Em.Component.extend(ScrollXYMixin, {
+	layoutName: 'components/llama-table-main',
 	classNames: 'llama-table',
 	dualHeaders: bool('root.dualHeaders'),
 	showFooter: bool('root.showFooter'),
@@ -48,16 +49,8 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 
 	footerView: null,
 
-	init: function () {
-		this._super();
-		this.pushObject(this.get('headerView'));
-		this.pushObject(this.get('bodyView'));
-	},
-
 	didInsertElement: function () {
 		this._super();
-		this.toggleDualHeader();
-		this.toggleFooter();
 		this.setHeight();
 		this.updateScrollPosition();
 	},
