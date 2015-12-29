@@ -19,12 +19,14 @@ var LlamaColumngroup = Em.CollectionView.extend({
 	hiddenColumns: filterBy('columns', 'isHidden'),
 	visibleColumns: setDiff('columns', 'hiddenColumns'),
 
-	width: computed('visibleColumns.@each.width', function () {
-		var widths = this.get('visibleColumns').mapBy('width');
-		var total = widths.reduce(function (total, val) {
-			return total + val;
-		}, 0);
-		return total;
+	width: computed('visibleColumns.@each.width', {
+		get: function () {
+			var widths = this.get('visibleColumns').mapBy('width');
+			var total = widths.reduce(function (total, val) {
+				return total + val;
+			}, 0);
+			return total;
+		}
 	}),
 
 	setWidth: on('didInsertElement', observer('width', function () {

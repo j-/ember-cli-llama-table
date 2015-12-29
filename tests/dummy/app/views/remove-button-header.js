@@ -1,4 +1,4 @@
-import LlamaHeaderCell from 'llama-table/views/llama-header-cell';
+import LlamaHeaderCell from 'llama-table/components/llama-header-cell';
 
 var RemoveButtonHeader = LlamaHeaderCell.extend({
 	showButton: true,

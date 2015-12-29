@@ -2,7 +2,7 @@ import Em from 'ember';
 var computed = Em.computed;
 var alias = computed.alias;
 
-var LlamaCell = Em.View.extend({
+var LlamaCell = Em.Component.extend({
 	classNames: 'llama-cell',
 
 	column: null,

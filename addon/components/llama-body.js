@@ -12,29 +12,37 @@ var LlamaBody = Em.ContainerView.extend({
 	columngroups: null,
 	rows: null,
 
-	contentView: computed(function () {
-		var View = this.get('controller.ContentView');
-		return this.createChildView(View, {
-			columngroups: this.get('columngroups'),
-			rows: this.get('rows')
-		});
+	contentView: computed({
+		get: function () {
+			var View = this.get('controller.ContentView');
+			return this.createChildView(View, {
+				columngroups: this.get('columngroups'),
+				rows: this.get('rows')
+			});
+		}
 	}),
 
-	subcontentView: computed(function () {
-		var View = this.get('controller.SubcontentView');
-		return this.createChildView(View, {
-			rows: this.get('rows')
-		});
+	subcontentView: computed({
+		get: function () {
+			var View = this.get('controller.SubcontentView');
+			return this.createChildView(View, {
+				rows: this.get('rows')
+			});
+		}
 	}),
 
-	emptyView: computed(function () {
-		var View = this.get('controller.EmptyView');
-		return this.createChildView(View, {});
+	emptyView: computed({
+		get: function () {
+			var View = this.get('controller.EmptyView');
+			return this.createChildView(View, {});
+		}
 	}),
 
-	loadingView: computed(function () {
-		var View = this.get('controller.LoadingView');
-		return this.createChildView(View, {});
+	loadingView: computed({
+		get: function () {
+			var View = this.get('controller.LoadingView');
+			return this.createChildView(View, {});
+		}
 	}),
 
 	init: function () {

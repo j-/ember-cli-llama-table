@@ -11,11 +11,13 @@ var LlamaFooterColumn = LlamaColumn.extend({
 	data: null,
 	column: null,
 
-	itemViewClass: computed(function () {
-		var controller = this.get('controller');
-		var column = this.get('column');
-		var type = get(column, 'type');
-		return controller.getCellType(type);
+	itemViewClass: computed({
+		get: function () {
+			var controller = this.get('controller');
+			var column = this.get('column');
+			var type = get(column, 'type');
+			return controller.getCellType(type);
+		}
 	}),
 
 	createChildView: function (View, attrs) {

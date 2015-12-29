@@ -57,22 +57,26 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 	 * @optional
 	 * @see https://github.com/luxbet/ember-cli-llama-table/wiki/Table-configuration
 	 */
-	config: computed(function () {
-		return {};
+	config: computed({
+		get: function () {
+			return {};
+		}
 	}),
 
 	/**
 	 * Column definitions array with added sorting functionality.
 	 * @property {Ember.ArrayProxy} sortedColumns
 	 */
-	sortedColumns: computed(function () {
-		return Columns.create({
-			parentController: this,
-			container: this.get('container'),
-			sortProperties: ['order'],
-			sortAscending: true,
-			content: Em.A(this.get('columns'))
-		});
+	sortedColumns: computed({
+		get: function () {
+			return Columns.create({
+				parentController: this,
+				container: this.get('container'),
+				sortProperties: ['order'],
+				sortAscending: true,
+				// content: Em.A(this.get('columns'))
+			});
+		}
 	}),
 
 	/**
@@ -81,29 +85,31 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 	 *   custom controller if it is not necessary.
 	 * @property {Ember.ArrayProxy} sortedRows
 	 */
-	sortedRows: computed(function () {
-		var options = {
-			parentController: this,
-			container: this.get('container'),
-			sortProperties: this.get('sortProperties'),
-			sortAscending: this.get('sortAscending'),
-			content: Em.A(this.get('rows'))
-		};
-		// if `sortFunction` is present it will be called
-		// even if the value itself is falsy and not a function
-		var sortFunction = this.get('config.sortFunction');
-		if (typeof sortFunction === 'function') {
-			options.sortFunction = sortFunction;
+	sortedRows: computed({
+		get: function () {
+			var options = {
+				parentController: this,
+				container: this.get('container'),
+				sortProperties: this.get('sortProperties'),
+				sortAscending: this.get('sortAscending'),
+				content: Em.A(this.get('rows'))
+			};
+			// if `sortFunction` is present it will be called
+			// even if the value itself is falsy and not a function
+			var sortFunction = this.get('config.sortFunction');
+			if (typeof sortFunction === 'function') {
+				options.sortFunction = sortFunction;
+			}
+			var orderBy = this.get('config.orderBy');
+			if (typeof orderBy === 'function') {
+				options.orderBy = orderBy;
+			}
+			var Controller = SortedController;
+			if (this.get('hasSubcontent')) {
+				Controller = Rows;
+			}
+			return Controller.create(options);
 		}
-		var orderBy = this.get('config.orderBy');
-		if (typeof orderBy === 'function') {
-			options.orderBy = orderBy;
-		}
-		var Controller = SortedController;
-		if (this.get('hasSubcontent')) {
-			Controller = Rows;
-		}
-		return Controller.create(options);
 	}),
 
 	/**
@@ -259,12 +265,14 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 	 * Table view. Contains header and footer.
 	 * @property {Ember.View} tableView
 	 */
-	tableView: computed(function () {
-		var TableView = this.get('TableView');
-		return this.createChildView(TableView, {
-			columngroups: this.get('columngroups'),
-			rows: this.get('sortedRows')
-		});
+	tableView: computed({
+		get: function () {
+			var TableView = this.get('TableView');
+			return this.createChildView(TableView, {
+				columngroups: this.get('columngroups'),
+				rows: this.get('sortedRows')
+			});
+		}
 	}),
 
 	/**

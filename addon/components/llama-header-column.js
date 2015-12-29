@@ -8,12 +8,14 @@ var LlamaHeaderColumn = LlamaColumn.extend({
 
 	column: null,
 
-	itemViewClass: computed('config.header', function () {
-		var ViewClass = this.get('config.header');
-		if (Em.isEmpty(ViewClass)) {
-			ViewClass = this.get('controller.HeaderCellView');
+	itemViewClass: computed('config.header', {
+		get: function () {
+			var ViewClass = this.get('config.header');
+			if (Em.isEmpty(ViewClass)) {
+				ViewClass = this.get('controller.HeaderCellView');
+			}
+			return ViewClass;
 		}
-		return ViewClass;
 	}),
 
 	init: function () {

@@ -26,18 +26,20 @@ var LlamaEmbed = Em.ContainerView.extend({
 		return result;
 	},
 
-	offsetTop: computed('rows.@each.isExpanded', 'rows.@each.height', 'rows.@each.subcontentHeight', function () {
-		var sortedRows = this.get('rows');
-		var row = this.get('row');
-		var index = sortedRows.indexOf(row);
-		var previous = sortedRows.slice(0, index);
-		var calc = this.calculateRowHeight;
-		var previousHeight = previous.reduce(function (total, row) {
-			return total + calc(row);
-		}, 0);
-		var thisHeight = get(row, 'height');
-		var offsetTop = previousHeight + thisHeight;
-		return offsetTop;
+	offsetTop: computed('rows.@each.isExpanded', 'rows.@each.height', 'rows.@each.subcontentHeight', {
+		get: function () {
+			var sortedRows = this.get('rows');
+			var row = this.get('row');
+			var index = sortedRows.indexOf(row);
+			var previous = sortedRows.slice(0, index);
+			var calc = this.calculateRowHeight;
+			var previousHeight = previous.reduce(function (total, row) {
+				return total + calc(row);
+			}, 0);
+			var thisHeight = get(row, 'height');
+			var offsetTop = previousHeight + thisHeight;
+			return offsetTop;
+		}
 	}),
 
 	updateOffsetTop: observer('offsetTop', function () {
@@ -50,11 +52,13 @@ var LlamaEmbed = Em.ContainerView.extend({
 		$embed.css('height', this.get('height'));
 	}),
 
-	subcontentView: computed(function () {
-		var View = this.get('controller.config.subcontentView');
-		return this.createChildView(View, {
-			content: this.get('content')
-		});
+	subcontentView: computed({
+		get: function () {
+			var View = this.get('controller.config.subcontentView');
+			return this.createChildView(View, {
+				content: this.get('content')
+			});
+		}
 	}),
 
 	init: function () {

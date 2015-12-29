@@ -23,14 +23,16 @@ var LlamaColumn = Em.CollectionView.extend({
 	rows: null,
 	column: null,
 
-	config: computed('columnType', 'columnName', 'controller.config.types', function () {
-		var types = this.get('controller.config.types');
-		if (!Em.isArray(types)) {
-			return null;
+	config: computed('columnType', 'columnName', 'controller.config.types', {
+		get: function () {
+			var types = this.get('controller.config.types');
+			if (!Em.isArray(types)) {
+				return null;
+			}
+			var name = this.get('columnType') || this.get('columnName');
+			var type = Em.A(types).findBy('name', name);
+			return type;
 		}
-		var name = this.get('columnType') || this.get('columnName');
-		var type = Em.A(types).findBy('name', name);
-		return type;
 	}),
 
 	setWidth: on('didInsertElement', observer('width', function () {

@@ -15,26 +15,32 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 	rows: null,
 	columngroups: null,
 
-	headerView: computed(function () {
-		var View = this.get('controller.HeaderView');
-		return this.createChildView(View, {
-			columngroups: this.get('columngroups')
-		});
+	headerView: computed({
+		get: function () {
+			var View = this.get('controller.HeaderView');
+			return this.createChildView(View, {
+				columngroups: this.get('columngroups')
+			});
+		}
 	}),
 
-	dualHeaderView: computed(function () {
-		var View = this.get('controller.HeaderView');
-		return this.createChildView(View, {
-			columngroups: this.get('columngroups')
-		});
+	dualHeaderView: computed({
+		get: function () {
+			var View = this.get('controller.HeaderView');
+			return this.createChildView(View, {
+				columngroups: this.get('columngroups')
+			});
+		}
 	}),
 
-	bodyView: computed(function () {
-		var View = this.get('controller.BodyView');
-		return this.createChildView(View, {
-			columngroups: this.get('columngroups'),
-			rows: this.get('rows')
-		});
+	bodyView: computed({
+		get: function () {
+			var View = this.get('controller.BodyView');
+			return this.createChildView(View, {
+				columngroups: this.get('columngroups'),
+				rows: this.get('rows')
+			});
+		}
 	}),
 
 	footerView: null,

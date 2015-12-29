@@ -38,29 +38,35 @@ var LlamaBodyCell = LlamaCell.extend({
 	value: alias('cell'),
 	formatted: alias('value'),
 
-	tabindex: computed('isEditable', function () {
-		var onlyFocusEditable = this.get('controller.onlyFocusEditable');
-		var isEditable = this.get('isEditable');
-		var index = onlyFocusEditable && !isEditable ? null : 0;
-		return index;
+	tabindex: computed('isEditable', {
+		get: function () {
+			var onlyFocusEditable = this.get('controller.onlyFocusEditable');
+			var isEditable = this.get('isEditable');
+			var index = onlyFocusEditable && !isEditable ? null : 0;
+			return index;
+		}
 	}),
 
 	// only calculated once
-	observedFields: computed(function () {
-		var observes = this.get('column.observes');
-		if (!Em.isEmpty(observes)) {
-			return observes;
+	observedFields: computed({
+		get: function () {
+			var observes = this.get('column.observes');
+			if (!Em.isEmpty(observes)) {
+				return observes;
+			}
+			var id = this.get('column.name');
+			return id;
 		}
-		var id = this.get('column.name');
-		return id;
 	}),
 
-	marginBottom: computed('showingSubcontent', 'row.subcontentHeight', function () {
-		var isExpanded = this.get('showingSubcontent');
-		if (isExpanded) {
-			return this.get('row.subcontentHeight');
+	marginBottom: computed('showingSubcontent', 'row.subcontentHeight', {
+		get: function () {
+			var isExpanded = this.get('showingSubcontent');
+			if (isExpanded) {
+				return this.get('row.subcontentHeight');
+			}
+			return null;
 		}
-		return null;
 	}),
 
 	init: function () {

@@ -1,5 +1,4 @@
 import Em from 'ember';
-import LlamaBodyCell from 'llama-table/views/llama-body-cell';
 
 var RowHeightsController = Em.Controller.extend({
 	tableColumns: [
