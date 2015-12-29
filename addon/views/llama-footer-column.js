@@ -29,7 +29,7 @@ var LlamaFooterColumn = LlamaColumn.extend({
 
 	init: function () {
 		// override default assignment of `content` property
-		this.set('content', [this.get('data')]);
+		this.set('content', Em.A([this.get('data')]));
 		this._super();
 	}
 });

@@ -1,5 +1,4 @@
 import Em from 'ember';
-import InboundActions from 'ember-component-inbound-actions/inbound-actions';
 import ResizeColumns from 'llama-table/mixins/resize-columns';
 import CellTypes from 'llama-table/mixins/cell-types';
 import ViewConstructors from 'llama-table/mixins/view-constructors';
@@ -27,13 +26,12 @@ var SCROLL_IMMEDIATE = false; // invoke on trailing edge
  * @class LlamaTable
  * @constructor
  * @extends Ember.Component
- * @uses InboundActions
  * @uses ResizeColumnsMixin
  * @uses CellTypesMixin
  * @uses ViewConstructorsMixin
  * @uses FocusPositionMixin
  */
-var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, ViewConstructors, FocusPosition, {
+var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors, FocusPosition, {
 	classNames: ['llama-table-component'],
 	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'isLoading', 'hasSubcontent', 'showHeader', 'showFooter'],
 
@@ -73,7 +71,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			container: this.get('container'),
 			sortProperties: ['order'],
 			sortAscending: true,
-			content: this.get('columns')
+			content: Em.A(this.get('columns'))
 		});
 	}),
 
@@ -89,7 +87,7 @@ var LlamaTable = Em.Component.extend(InboundActions, ResizeColumns, CellTypes, V
 			container: this.get('container'),
 			sortProperties: this.get('sortProperties'),
 			sortAscending: this.get('sortAscending'),
-			content: this.get('rows')
+			content: Em.A(this.get('rows'))
 		};
 		// if `sortFunction` is present it will be called
 		// even if the value itself is falsy and not a function

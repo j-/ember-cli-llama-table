@@ -1,6 +1,7 @@
 import Em from 'ember';
 var get = Em.get;
 var set = Em.set;
+var on = Em.on;
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
@@ -26,11 +27,11 @@ var LlamaColumngroup = Em.CollectionView.extend({
 		return total;
 	}),
 
-	setWidth: observer('width', function () {
+	setWidth: on('didInsertElement', observer('width', function () {
 		var width = this.get('width');
 		var $columngroup = Em.$(this.$());
 		$columngroup.width(width);
-	}).on('didInsertElement'),
+	})),
 
 	createChildView: function (View, attrs) {
 		var columns = this.get('columns');

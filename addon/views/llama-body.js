@@ -1,4 +1,5 @@
 import Em from 'ember';
+var on = Em.on;
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
@@ -41,7 +42,7 @@ var LlamaBody = Em.ContainerView.extend({
 		this.pushObject(this.get('contentView'));
 	},
 
-	toggleSubcontent: observer('controller.hasSubcontent', function () {
+	toggleSubcontent: on('init', observer('controller.hasSubcontent', function () {
 		var hasSubcontent = this.get('controller.hasSubcontent');
 		if (hasSubcontent) {
 			this.pushObject(this.get('subcontentView'));
@@ -49,9 +50,9 @@ var LlamaBody = Em.ContainerView.extend({
 		else {
 			this.removeObject(this.get('subcontentView'));
 		}
-	}).on('init'),
+	})),
 
-	toggleEmpty: observer('isEmpty', 'isLoading', function () {
+	toggleEmpty: on('init', observer('isEmpty', 'isLoading', function () {
 		var isEmpty = this.get('isEmpty');
 		var isLoading = this.get('isLoading');
 		var emptyView = this.get('emptyView');
@@ -67,7 +68,7 @@ var LlamaBody = Em.ContainerView.extend({
 			this.removeObject(loadingView);
 			this.pushObject(emptyView);
 		}
-	}).on('init')
+	}))
 });
 
 export default LlamaBody;

@@ -2,6 +2,7 @@ import Em from 'ember';
 import { join } from 'llama-table/computed';
 var get = Em.get;
 var set = Em.set;
+var on = Em.on;
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
@@ -28,15 +29,15 @@ var LlamaColumn = Em.CollectionView.extend({
 			return null;
 		}
 		var name = this.get('columnType') || this.get('columnName');
-		var type = types.findBy('name', name);
+		var type = Em.A(types).findBy('name', name);
 		return type;
 	}),
 
-	setWidth: observer('width', function () {
+	setWidth: on('didInsertElement', observer('width', function () {
 		var width = this.get('width');
 		var $column = Em.$(this.$());
 		$column.width(width);
-	}).on('didInsertElement'),
+	})),
 
 	cellViews: alias('childViews'),
 

@@ -18,7 +18,7 @@ var LlamaHeaderColumn = LlamaColumn.extend({
 
 	init: function () {
 		// override default assignment of `content` property
-		this.set('content', [this.get('column')]);
+		this.set('content', Em.A([this.get('column')]));
 		this._super();
 	}
 });
