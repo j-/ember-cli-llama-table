@@ -8,7 +8,7 @@ var and = computed.and;
 var not = computed.not;
 
 var LlamaHeaderCell = LlamaCell.extend({
-	layoutName: 'llama-header-cell',
+	layoutName: 'components/llama-header-cell',
 	classNames: 'llama-header-cell',
 	classNameBindings: ['sortByThis', 'sortByThisAscending', 'sortByThisDescending', 'isSortable'],
 	attributeBindings: ['title'],
