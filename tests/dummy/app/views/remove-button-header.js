@@ -6,7 +6,7 @@ var RemoveButtonHeader = LlamaHeaderCell.extend({
 	formatted: 'Remove all',
 	actions: {
 		click: function () {
-			this.get('controller').sendAction('removeAll');
+			this.get('root').sendAction('removeAll');
 		}
 	}
 });

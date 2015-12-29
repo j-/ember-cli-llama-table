@@ -9,7 +9,7 @@ var ButtonCell = LlamaBodyCell.extend({
 	layoutName: 'button-cell',
 	actions: {
 		click: function () {
-			var controller = this.get('controller');
+			var controller = this.get('root');
 			var rows = controller.get('rows');
 			var row = this.get('content');
 			var index = rows.indexOf(row);
