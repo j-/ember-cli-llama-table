@@ -335,15 +335,15 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 		return columns;
 	},
 
-	/**
-	 * Custom render function which appends table view to component element.
-	 * @method render
-	 */
-	render: function () {
-		var tableView = this.get('tableView');
-		this.appendChild(tableView);
-		tableView.render.apply(tableView, arguments);
-	},
+	// /**
+	//  * Custom render function which appends table view to component element.
+	//  * @method render
+	//  */
+	// render: function () {
+	// 	var tableView = this.get('tableView');
+	// 	this.appendChild(tableView);
+	// 	tableView.render.apply(tableView, arguments);
+	// },
 
 	/**
 	 * Destroy created objects.
