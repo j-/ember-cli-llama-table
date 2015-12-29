@@ -392,9 +392,12 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 		bodyColumngroupViews.forEach(function (columngroupView) {
 			var columnViews = columngroupView.get('columnViews');
 			columnViews.forEach(function (columnView) {
+				var toHover;
 				var cellViews = columnView.get('cellViews');
-				var toHover = cellViews.objectAt(index);
+				cellViews = Em.makeArray(cellViews);
+				cellViews = Em.A(cellViews);
 				cellViews.setEach('hover', false);
+				toHover = cellViews.objectAt(index);
 				if (toHover) {
 					toHover.set('hover', true);
 				}
