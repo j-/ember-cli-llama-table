@@ -47,45 +47,22 @@ var LlamaTable = Em.Component.extend(ScrollXYMixin, {
 		}
 	}),
 
-	footerView: null,
+	footerView: computed({
+		get: function () {
+			var View = this.get('root.FooterView');
+			return this.createChildView(View, {
+				root: this.get('root'),
+				columngroups: this.get('columngroups'),
+				rows: this.get('rows')
+			});
+		}
+	}),
 
 	didInsertElement: function () {
 		this._super();
 		this.setHeight();
 		this.updateScrollPosition();
 	},
-
-	toggleDualHeader: observer('dualHeaders', function () {
-		var dualHeaders = this.get('dualHeaders');
-		if (dualHeaders) {
-			this.pushObject(this.get('dualHeaderView'));
-		}
-		else {
-			this.removeObject(this.get('dualHeaderView'));
-		}
-	}),
-
-	toggleFooter: observer('showFooter', function () {
-		var showFooter = this.get('showFooter');
-		var View, footerView;
-		if (showFooter) {
-			// create and show footer
-			View = this.get('root.FooterView');
-			footerView = this.createChildView(View, {
-				root: this.get('root'),
-				columngroups: this.get('columngroups'),
-				rows: this.get('rows')
-			});
-			this.set('footerView', footerView);
-			this.pushObject(footerView);
-		}
-		else {
-			// remove and unset footer
-			footerView = this.get('footerView');
-			this.removeObject(footerView);
-			this.set('footerView', null);
-		}
-	}),
 
 	updateScrollPosition: observer('scrollLeft', 'scrollTop', function () {
 		var $table = Em.$(this.$());
