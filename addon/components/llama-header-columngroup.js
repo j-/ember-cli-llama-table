@@ -4,7 +4,7 @@ var alias = Em.computed.alias;
 
 var LlamaHeaderColumngroup = LlamaColumngroup.extend({
 	classNames: 'llama-header-columngroup',
-	itemViewClass: alias('controller.HeaderColumnView'),
+	itemViewClass: alias('root.HeaderColumnView'),
 
 	columns: null
 });

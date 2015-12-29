@@ -26,15 +26,15 @@ var LlamaHeaderCell = LlamaCell.extend({
 		}
 	}),
 
-	tableIsSortable: defaultValue('controller.isSortable', true),
+	tableIsSortable: defaultValue('root.isSortable', true),
 	columnIsSortable: defaultValue('column.isSortable', true),
 	isSortable: and('tableIsSortable', 'columnIsSortable'),
-	tableIsResizable: defaultValue('controller.isResizable', true),
+	tableIsResizable: defaultValue('root.isResizable', true),
 	columnIsResizable: defaultValue('column.isResizable', true),
 	isResizable: and('tableIsResizable', 'columnIsResizable'),
 
-	sortProperties: alias('controller.sortProperties'),
-	sortAscending: bool('controller.sortAscending'),
+	sortProperties: alias('root.sortProperties'),
+	sortAscending: bool('root.sortAscending'),
 	sortDescending: not('sortAscending'),
 
 	sortByThis: computed('sortProperties.firstObject', 'column.name', {
@@ -50,7 +50,7 @@ var LlamaHeaderCell = LlamaCell.extend({
 
 	mouseDown: function (e) {
 		var isResizeAction = Em.$(e.target).is('.resize-handle');
-		var controller = this.get('controller');
+		var controller = this.get('root');
 		if (e.which === 1) {
 			e.preventDefault();
 			if (isResizeAction && this.get('isResizable')) {

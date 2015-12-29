@@ -6,16 +6,17 @@ var alias = computed.alias;
 
 var LlamaBody = Em.ContainerView.extend({
 	classNames: ['llama-body'],
-	isEmpty: alias('controller.isEmpty'),
-	isLoading: alias('controller.isLoading'),
+	isEmpty: alias('root.isEmpty'),
+	isLoading: alias('root.isLoading'),
 
 	columngroups: null,
 	rows: null,
 
 	contentView: computed({
 		get: function () {
-			var View = this.get('controller.ContentView');
+			var View = this.get('root.ContentView');
 			return this.createChildView(View, {
+				root: this.get('root'),
 				columngroups: this.get('columngroups'),
 				rows: this.get('rows')
 			});
@@ -24,8 +25,9 @@ var LlamaBody = Em.ContainerView.extend({
 
 	subcontentView: computed({
 		get: function () {
-			var View = this.get('controller.SubcontentView');
+			var View = this.get('root.SubcontentView');
 			return this.createChildView(View, {
+				root: this.get('root'),
 				rows: this.get('rows')
 			});
 		}
@@ -33,15 +35,19 @@ var LlamaBody = Em.ContainerView.extend({
 
 	emptyView: computed({
 		get: function () {
-			var View = this.get('controller.EmptyView');
-			return this.createChildView(View, {});
+			var View = this.get('root.EmptyView');
+			return this.createChildView(View, {
+				root: this.get('root')
+			});
 		}
 	}),
 
 	loadingView: computed({
 		get: function () {
-			var View = this.get('controller.LoadingView');
-			return this.createChildView(View, {});
+			var View = this.get('root.LoadingView');
+			return this.createChildView(View, {
+				root: this.get('root')
+			});
 		}
 	}),
 
@@ -50,8 +56,8 @@ var LlamaBody = Em.ContainerView.extend({
 		this.pushObject(this.get('contentView'));
 	},
 
-	toggleSubcontent: on('init', observer('controller.hasSubcontent', function () {
-		var hasSubcontent = this.get('controller.hasSubcontent');
+	toggleSubcontent: on('init', observer('root.hasSubcontent', function () {
+		var hasSubcontent = this.get('root.hasSubcontent');
 		if (hasSubcontent) {
 			this.pushObject(this.get('subcontentView'));
 		}

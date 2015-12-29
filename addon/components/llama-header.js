@@ -6,10 +6,10 @@ var alias = Em.computed.alias;
 
 var LlamaHeader = Em.CollectionView.extend({
 	classNames: 'llama-header',
-	itemViewClass: alias('controller.HeaderColumngroupView'),
+	itemViewClass: alias('root.HeaderColumngroupView'),
 	columngroupViews: alias('childViews'),
 	contentBinding: 'columngroups',
-	scrollTop: alias('controller.scrollTop'),
+	scrollTop: alias('root.scrollTop'),
 
 	columngroups: null,
 
@@ -20,6 +20,7 @@ var LlamaHeader = Em.CollectionView.extend({
 
 	createChildView: function (View, attrs) {
 		var columns = get(attrs, 'content');
+		set(attrs, 'root', this.get('root'));
 		set(attrs, 'columns', columns);
 		return this._super(View, attrs);
 	},

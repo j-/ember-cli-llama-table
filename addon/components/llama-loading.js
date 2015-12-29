@@ -4,7 +4,7 @@ var alias = Em.computed.alias;
 
 var LoadingView = EmptyView.extend({
 	classNames: ['llama-loading'],
-	content: alias('controller.loadingText')
+	content: alias('root.loadingText')
 });
 
 export default LoadingView;

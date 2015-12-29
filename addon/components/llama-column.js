@@ -23,9 +23,9 @@ var LlamaColumn = Em.CollectionView.extend({
 	rows: null,
 	column: null,
 
-	config: computed('columnType', 'columnName', 'controller.config.types', {
+	config: computed('columnType', 'columnName', 'root.config.types', {
 		get: function () {
-			var types = this.get('controller.config.types');
+			var types = this.get('root.config.types');
 			if (!Em.isArray(types)) {
 				return null;
 			}
@@ -45,6 +45,7 @@ var LlamaColumn = Em.CollectionView.extend({
 
 	createChildView: function (View, attrs) {
 		var column = this.get('column');
+		set(attrs, 'root', this.get('root'));
 		set(attrs, 'column', column);
 		return this._super(View, attrs);
 	},

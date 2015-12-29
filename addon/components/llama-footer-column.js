@@ -13,7 +13,7 @@ var LlamaFooterColumn = LlamaColumn.extend({
 
 	itemViewClass: computed({
 		get: function () {
-			var controller = this.get('controller');
+			var controller = this.get('root');
 			var column = this.get('column');
 			var type = get(column, 'type');
 			return controller.getCellType(type);
@@ -23,6 +23,7 @@ var LlamaFooterColumn = LlamaColumn.extend({
 	createChildView: function (View, attrs) {
 		var data = this.get('data');
 		var column = this.get('column');
+		set(attrs, 'root', this.get('root'));
 		set(attrs, 'row', data);
 		set(attrs, 'column', column);
 		set(attrs, 'isFooter', true);

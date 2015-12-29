@@ -4,13 +4,14 @@ var set = Em.set;
 
 var LlamaBodyColumngroup = LlamaColumngroup.extend({
 	classNames: 'llama-body-columngroup',
-	itemViewClass: Em.computed.alias('controller.BodyColumnView'),
+	itemViewClass: Em.computed.alias('root.BodyColumnView'),
 
 	columns: null,
 	rows: null,
 
 	createChildView: function (View, attrs) {
 		var rows = this.get('rows');
+		set(attrs, 'root', this.get('root'));
 		set(attrs, 'rows', rows);
 		return this._super(View, attrs);
 	}

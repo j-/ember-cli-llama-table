@@ -7,20 +7,20 @@ var alias = computed.alias;
 
 var LlamaFooter = Em.CollectionView.extend({
 	classNames: 'llama-footer',
-	itemViewClass: alias('controller.FooterColumngroupView'),
+	itemViewClass: alias('root.FooterColumngroupView'),
 	columngroupViews: alias('childViews'),
 	contentBinding: 'columngroups',
-	scrollTop: alias('controller.scrollTop'),
+	scrollTop: alias('root.scrollTop'),
 
 	columngroups: null,
 	rows: null,
 
-	data: computed('controller.footerController', {
+	data: computed('root.footerController', {
 		get: function (key, val, old) {
 			if (old) {
 				old.destroy();
 			}
-			var Constructor = this.get('controller.footerController');
+			var Constructor = this.get('root.footerController');
 			var instance;
 			if (typeof Constructor === 'function') {
 				instance = Constructor.create({
@@ -39,6 +39,7 @@ var LlamaFooter = Em.CollectionView.extend({
 	createChildView: function (View, attrs) {
 		var data = this.get('data');
 		var columns = get(attrs, 'content');
+		set(attrs, 'root', this.get('root'));
 		set(attrs, 'columns', columns);
 		set(attrs, 'data', data);
 		return this._super(View, attrs);

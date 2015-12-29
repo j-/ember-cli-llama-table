@@ -14,7 +14,7 @@ var LlamaBodyColumn = LlamaColumn.extend({
 
 	itemViewClass: computed({
 		get: function () {
-			var controller = this.get('controller');
+			var controller = this.get('root');
 			var column = this.get('column');
 			var type = get(column, 'type');
 			return controller.getCellType(type);
@@ -23,6 +23,7 @@ var LlamaBodyColumn = LlamaColumn.extend({
 
 	createChildView: function (View, attrs) {
 		var row = get(attrs, 'content');
+		set(attrs, 'root', this.get('root'));
 		set(attrs, 'row', row);
 		return this._super(View, attrs);
 	}

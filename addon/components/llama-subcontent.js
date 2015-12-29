@@ -11,11 +11,12 @@ var LlamaSubcontent = Em.CollectionView.extend({
 
 	rows: null,
 
-	itemViewClass: alias('controller.EmbedView'),
+	itemViewClass: alias('root.EmbedView'),
 	expandedRows: filterBy('rows', 'isExpanded'),
 
 	createChildView: function (View, attrs) {
 		var row = get(attrs, 'content');
+		set(attrs, 'root', this.get('root'));
 		set(attrs, 'row', row);
 		return this._super(View, attrs);
 	}

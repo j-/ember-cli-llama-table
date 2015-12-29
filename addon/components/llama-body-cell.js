@@ -24,7 +24,7 @@ var LlamaBodyCell = LlamaCell.extend({
 	height: alias('row.height'),
 	columnIsClickable: alias('column.isClickable'),
 	rowIsBody: not('isFooter'),
-	rowIsClickable: and('controller.enableRowClick', 'rowIsBody'),
+	rowIsClickable: and('root.enableRowClick', 'rowIsBody'),
 	isClickable: or('columnIsClickable', 'rowIsClickable'),
 	showingSubcontent: bool('row.isExpanded'),
 	isEmpty: empty('value'),
@@ -40,7 +40,7 @@ var LlamaBodyCell = LlamaCell.extend({
 
 	tabindex: computed('isEditable', {
 		get: function () {
-			var onlyFocusEditable = this.get('controller.onlyFocusEditable');
+			var onlyFocusEditable = this.get('root.onlyFocusEditable');
 			var isEditable = this.get('isEditable');
 			var index = onlyFocusEditable && !isEditable ? null : 0;
 			return index;
@@ -102,15 +102,15 @@ var LlamaBodyCell = LlamaCell.extend({
 
 	mouseEnter: function () {
 		var row = this.get('row');
-		this.get('controller').send('highlightRow', row);
+		this.get('root').send('highlightRow', row);
 	},
 
 	mouseLeave: function () {
-		this.get('controller').send('stopHighlightingRows');
+		this.get('root').send('stopHighlightingRows');
 	},
 
 	click: function () {
-		var controller = this.get('controller');
+		var controller = this.get('root');
 		var row = this.get('row');
 		var column = this.get('column');
 		if (this.get('isClickable')) {
@@ -122,7 +122,7 @@ var LlamaBodyCell = LlamaCell.extend({
 	},
 
 	focusIn: function () {
-		var controller = this.get('controller');
+		var controller = this.get('root');
 		var row = this.get('row');
 		var column = this.get('column');
 		controller.send('focusCell', row, column);

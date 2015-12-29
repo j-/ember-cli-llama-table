@@ -10,7 +10,7 @@ var LlamaEmbed = Em.ContainerView.extend({
 
 	row: null,
 
-	rows: alias('controller.sortedRows'),
+	rows: alias('root.sortedRows'),
 
 	didInsertElement: function () {
 		this._super();
@@ -54,8 +54,9 @@ var LlamaEmbed = Em.ContainerView.extend({
 
 	subcontentView: computed({
 		get: function () {
-			var View = this.get('controller.config.subcontentView');
+			var View = this.get('root.config.subcontentView');
 			return this.createChildView(View, {
+				root: this.get('root'),
 				content: this.get('content')
 			});
 		}

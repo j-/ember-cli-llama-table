@@ -13,7 +13,7 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 	classNames: 'llama-content',
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
-	itemViewClass: alias('controller.BodyColumngroupView'),
+	itemViewClass: alias('root.BodyColumngroupView'),
 	columngroupViews: alias('childViews'),
 
 	rows: null,
@@ -25,6 +25,7 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 	createChildView: function (View, attrs) {
 		var rows = this.get('rows');
 		var columns = get(attrs, 'content');
+		set(attrs, 'root', this.get('root'));
 		set(attrs, 'rows', rows);
 		set(attrs, 'columns', columns);
 		return this._super(View, attrs);
@@ -33,20 +34,20 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 	handleTabKey: function (e) {
 		e.preventDefault();
 		if (e.shiftKey) {
-			this.get('controller').send('reverseTabKey');
+			this.get('root').send('reverseTabKey');
 		}
 		else {
-			this.get('controller').send('tabKey');
+			this.get('root').send('tabKey');
 		}
 	},
 
 	handleEnterKey: function (e) {
 		e.preventDefault();
 		if (e.shiftKey) {
-			this.get('controller').send('reverseEnterKey');
+			this.get('root').send('reverseEnterKey');
 		}
 		else {
-			this.get('controller').send('enterKey');
+			this.get('root').send('enterKey');
 		}
 	},
 
@@ -70,7 +71,7 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 
 	actions: {
 		keyLeft: function (e) {
-			var controller = this.get('controller');
+			var controller = this.get('root');
 			if (e.shiftKey) {
 				controller.send('focusHardLeft');
 			}
@@ -79,7 +80,7 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 			}
 		},
 		keyUp: function (e) {
-			var controller = this.get('controller');
+			var controller = this.get('root');
 			if (e.shiftKey) {
 				controller.send('focusHardUp');
 			}
@@ -88,7 +89,7 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 			}
 		},
 		keyRight: function (e) {
-			var controller = this.get('controller');
+			var controller = this.get('root');
 			if (e.shiftKey) {
 				controller.send('focusHardRight');
 			}
@@ -97,7 +98,7 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 			}
 		},
 		keyDown: function (e) {
-			var controller = this.get('controller');
+			var controller = this.get('root');
 			if (e.shiftKey) {
 				controller.send('focusHardDown');
 			}

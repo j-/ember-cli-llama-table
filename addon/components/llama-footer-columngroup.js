@@ -12,6 +12,7 @@ var LlamaFooterColumngroup = LlamaColumngroup.extend({
 
 	createChildView: function (View, attrs) {
 		var data = this.get('data');
+		set(attrs, 'root', this.get('root'));
 		set(attrs, 'data', data);
 		return this._super(View, attrs);
 	}

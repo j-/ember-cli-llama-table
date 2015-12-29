@@ -12,7 +12,7 @@ var LlamaHeaderColumn = LlamaColumn.extend({
 		get: function () {
 			var ViewClass = this.get('config.header');
 			if (Em.isEmpty(ViewClass)) {
-				ViewClass = this.get('controller.HeaderCellView');
+				ViewClass = this.get('root.HeaderCellView');
 			}
 			return ViewClass;
 		}

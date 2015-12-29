@@ -7,18 +7,19 @@ var bool = computed.bool;
 
 var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 	classNames: 'llama-table',
-	dualHeaders: bool('controller.dualHeaders'),
-	showFooter: bool('controller.showFooter'),
-	scrollLeft: alias('controller.scrollLeft'),
-	scrollTop: alias('controller.scrollTop'),
+	dualHeaders: bool('root.dualHeaders'),
+	showFooter: bool('root.showFooter'),
+	scrollLeft: alias('root.scrollLeft'),
+	scrollTop: alias('root.scrollTop'),
 
 	rows: null,
 	columngroups: null,
 
 	headerView: computed({
 		get: function () {
-			var View = this.get('controller.HeaderView');
+			var View = this.get('root.HeaderView');
 			return this.createChildView(View, {
+				root: this.get('root'),
 				columngroups: this.get('columngroups')
 			});
 		}
@@ -26,8 +27,9 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 
 	dualHeaderView: computed({
 		get: function () {
-			var View = this.get('controller.HeaderView');
+			var View = this.get('root.HeaderView');
 			return this.createChildView(View, {
+				root: this.get('root'),
 				columngroups: this.get('columngroups')
 			});
 		}
@@ -35,8 +37,9 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 
 	bodyView: computed({
 		get: function () {
-			var View = this.get('controller.BodyView');
+			var View = this.get('root.BodyView');
 			return this.createChildView(View, {
+				root: this.get('root'),
 				columngroups: this.get('columngroups'),
 				rows: this.get('rows')
 			});
@@ -74,8 +77,9 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 		var View, footerView;
 		if (showFooter) {
 			// create and show footer
-			View = this.get('controller.FooterView');
+			View = this.get('root.FooterView');
 			footerView = this.createChildView(View, {
+				root: this.get('root'),
 				columngroups: this.get('columngroups'),
 				rows: this.get('rows')
 			});
@@ -96,9 +100,9 @@ var LlamaTable = Em.ContainerView.extend(ScrollXYMixin, {
 		$table.scrollTop(this.get('scrollTop'));
 	}),
 
-	setHeight: observer('controller.maxHeight', function () {
+	setHeight: observer('root.maxHeight', function () {
 		var $table = Em.$(this.$());
-		$table.css('maxHeight', this.get('controller.maxHeight'));
+		$table.css('maxHeight', this.get('root.maxHeight'));
 	}),
 
 	actions: {
