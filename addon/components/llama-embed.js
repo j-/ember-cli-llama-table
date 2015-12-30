@@ -4,7 +4,8 @@ var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
 
-var LlamaEmbed = Em.ContainerView.extend({
+var LlamaEmbed = Em.Component.extend({
+	layoutName: 'components/llama-embed',
 	classNames: 'llama-embed',
 	height: alias('row.subcontentHeight'),
 
@@ -62,10 +63,10 @@ var LlamaEmbed = Em.ContainerView.extend({
 		}
 	}),
 
-	init: function () {
-		this._super();
-		this.pushObject(this.get('subcontentView'));
-	}
+	// init: function () {
+	// 	this._super();
+	// 	this.pushObject(this.get('subcontentView'));
+	// }
 });
 
 export default LlamaEmbed;
