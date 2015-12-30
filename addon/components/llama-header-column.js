@@ -4,6 +4,7 @@ var set = Em.set;
 var computed = Em.computed;
 
 var LlamaHeaderColumn = LlamaColumn.extend({
+	layoutName: 'components/llama-header-column',
 	classNames: 'llama-header-column',
 
 	column: null,
@@ -18,11 +19,11 @@ var LlamaHeaderColumn = LlamaColumn.extend({
 		}
 	}),
 
-	init: function () {
-		// override default assignment of `content` property
-		this.set('content', Em.A([this.get('column')]));
-		this._super();
-	}
+	// init: function () {
+	// 	// override default assignment of `content` property
+	// 	this.set('content', Em.A([this.get('column')]));
+	// 	this._super();
+	// }
 });
 
 export default LlamaHeaderColumn;

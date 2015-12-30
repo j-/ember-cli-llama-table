@@ -9,7 +9,8 @@ var alias = computed.alias;
 var bool = computed.bool;
 var not = computed.not;
 
-var LlamaColumn = Em.CollectionView.extend({
+var LlamaColumn = Em.Component.extend({
+	layoutName: 'components/llama-column',
 	classNames: 'llama-column',
 	classNameBindings: ['textAlignClass', 'columnClassNames', 'isVisible', 'isHidden'],
 	attributeBindings: ['columnName:data-column-name', 'columnType:data-column-type'],
@@ -43,12 +44,12 @@ var LlamaColumn = Em.CollectionView.extend({
 
 	cellViews: alias('childViews'),
 
-	createChildView: function (View, attrs) {
-		var column = this.get('column');
-		set(attrs, 'root', this.get('root'));
-		set(attrs, 'column', column);
-		return this._super(View, attrs);
-	},
+	// createChildView: function (View, attrs) {
+	// 	var column = this.get('column');
+	// 	set(attrs, 'root', this.get('root'));
+	// 	set(attrs, 'column', column);
+	// 	return this._super(View, attrs);
+	// },
 
 	textAlignClass: computed('config.textAlign', 'column.textAlign', function () {
 		var textAlign = this.get('config.textAlign') || this.get('column.textAlign');

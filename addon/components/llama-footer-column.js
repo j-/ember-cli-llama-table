@@ -6,6 +6,7 @@ var computed = Em.computed;
 var alias = computed.alias;
 
 var LlamaFooterColumn = LlamaColumn.extend({
+	layoutName: 'components/llama-footer-column',
 	classNames: 'llama-footer-column',
 
 	data: null,
@@ -30,11 +31,11 @@ var LlamaFooterColumn = LlamaColumn.extend({
 		return this._super(View, attrs);
 	},
 
-	init: function () {
-		// override default assignment of `content` property
-		this.set('content', Em.A([this.get('data')]));
-		this._super();
-	}
+	// init: function () {
+	// 	// override default assignment of `content` property
+	// 	this.set('content', Em.A([this.get('data')]));
+	// 	this._super();
+	// }
 });
 
 export default LlamaFooterColumn;

@@ -6,8 +6,8 @@ var set = Em.set;
 var computed = Em.computed;
 
 var LlamaBodyColumn = LlamaColumn.extend({
+	layoutName: 'components/llama-body-column',
 	classNames: 'llama-body-column',
-	contentBinding: 'rows',
 
 	rows: null,
 	column: null,
@@ -21,12 +21,12 @@ var LlamaBodyColumn = LlamaColumn.extend({
 		}
 	}),
 
-	createChildView: function (View, attrs) {
-		var row = get(attrs, 'content');
-		set(attrs, 'root', this.get('root'));
-		set(attrs, 'row', row);
-		return this._super(View, attrs);
-	}
+	// createChildView: function (View, attrs) {
+	// 	var row = get(attrs, 'content');
+	// 	set(attrs, 'root', this.get('root'));
+	// 	set(attrs, 'row', row);
+	// 	return this._super(View, attrs);
+	// }
 });
 
 export default LlamaBodyColumn;
