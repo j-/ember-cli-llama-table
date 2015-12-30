@@ -1,5 +1,5 @@
 import Em from 'ember';
-import LlamaBodyCell from 'llama-table/views/llama-body-cell';
+import LlamaBodyCell from 'llama-table/components/llama-body-cell';
 
 var ExpandoCell = LlamaBodyCell.extend({
 	templateName: 'expando-cell',
