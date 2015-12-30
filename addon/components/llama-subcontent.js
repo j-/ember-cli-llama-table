@@ -5,7 +5,8 @@ var computed = Em.computed;
 var alias = computed.alias;
 var filterBy = computed.filterBy;
 
-var LlamaSubcontent = Em.CollectionView.extend({
+var LlamaSubcontent = Em.Component.extend({
+	layoutName: 'components/llama-subcontent',
 	classNames: ['llama-subcontent'],
 	contentBinding: 'expandedRows',
 
@@ -14,12 +15,12 @@ var LlamaSubcontent = Em.CollectionView.extend({
 	itemViewClass: alias('root.EmbedView'),
 	expandedRows: filterBy('rows', 'isExpanded'),
 
-	createChildView: function (View, attrs) {
-		var row = get(attrs, 'content');
-		set(attrs, 'root', this.get('root'));
-		set(attrs, 'row', row);
-		return this._super(View, attrs);
-	}
+	// createChildView: function (View, attrs) {
+	// 	var row = get(attrs, 'content');
+	// 	set(attrs, 'root', this.get('root'));
+	// 	set(attrs, 'row', row);
+	// 	return this._super(View, attrs);
+	// }
 });
 
 export default LlamaSubcontent;
