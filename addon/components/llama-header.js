@@ -4,7 +4,8 @@ var set = Em.set;
 var observer = Em.observer;
 var alias = Em.computed.alias;
 
-var LlamaHeader = Em.CollectionView.extend({
+var LlamaHeader = Em.Component.extend({
+	layoutName: 'components/llama-header',
 	classNames: 'llama-header',
 	itemViewClass: alias('root.HeaderColumngroupView'),
 	columngroupViews: alias('childViews'),
@@ -18,12 +19,12 @@ var LlamaHeader = Em.CollectionView.extend({
 		this.updateScrollPosition();
 	},
 
-	createChildView: function (View, attrs) {
-		var columns = get(attrs, 'content');
-		set(attrs, 'root', this.get('root'));
-		set(attrs, 'columns', columns);
-		return this._super(View, attrs);
-	},
+	// createChildView: function (View, attrs) {
+	// 	var columns = get(attrs, 'content');
+	// 	set(attrs, 'root', this.get('root'));
+	// 	set(attrs, 'columns', columns);
+	// 	return this._super(View, attrs);
+	// },
 
 	updateScrollPosition: observer('scrollTop', function () {
 		var $header = Em.$(this.$());
