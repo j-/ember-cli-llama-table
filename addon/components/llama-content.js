@@ -9,7 +9,8 @@ var alias = computed.alias;
 var TAB = 9;
 var ENTER = 13;
 
-var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
+var LlamaContent = Em.Component.extend(ArrowKeysMixin, {
+	layoutName: 'components/llama-content',
 	classNames: 'llama-content',
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
@@ -22,14 +23,14 @@ var LlamaContent = Em.CollectionView.extend(ArrowKeysMixin, {
 
 	copyController: CopyController.create(),
 
-	createChildView: function (View, attrs) {
-		var rows = this.get('rows');
-		var columns = get(attrs, 'content');
-		set(attrs, 'root', this.get('root'));
-		set(attrs, 'rows', rows);
-		set(attrs, 'columns', columns);
-		return this._super(View, attrs);
-	},
+	// createChildView: function (View, attrs) {
+	// 	var rows = this.get('rows');
+	// 	var columns = get(attrs, 'content');
+	// 	set(attrs, 'root', this.get('root'));
+	// 	set(attrs, 'rows', rows);
+	// 	set(attrs, 'columns', columns);
+	// 	return this._super(View, attrs);
+	// },
 
 	handleTabKey: function (e) {
 		e.preventDefault();

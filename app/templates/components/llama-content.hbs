@@ -1,0 +1,9 @@
+{{#each columngroups as |columngroup|}}
+	{{view itemViewClass
+		root=root
+		rows=rows
+		columns=columngroup
+		columngroup=columngroup
+		content=columngroup
+	}}
+{{/each}}
