@@ -1,1 +1,15 @@
-{{view contentView}}
+{{#if renderContent}}
+	{{view contentView}}
+{{/if}}
+
+{{#if renderSubcontent}}
+	{{view subcontentView}}
+{{/if}}
+
+{{#if renderEmpty}}
+	{{view emptyView}}
+{{/if}}
+
+{{#if renderLoading}}
+	{{view loadingView}}
+{{/if}}

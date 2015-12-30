@@ -2,16 +2,25 @@ import Em from 'ember';
 var on = Em.on;
 var observer = Em.observer;
 var computed = Em.computed;
-var alias = computed.alias;
+var bool = computed.bool;
+var not = computed.not;
+var and = computed.and;
 
 var LlamaBody = Em.Component.extend({
 	layoutName: 'components/llama-body',
 	classNames: ['llama-body'],
-	isEmpty: alias('root.isEmpty'),
-	isLoading: alias('root.isLoading'),
+	isEmpty: bool('root.isEmpty'),
+	isLoading: bool('root.isLoading'),
+	notLoading: not('isLoading'),
+	hasSubcontent: bool('root.hasSubcontent'),
 
 	columngroups: null,
 	rows: null,
+
+	renderContent: not('isEmpty'),
+	renderSubcontent: bool('hasSubcontent'),
+	renderEmpty: and('isEmpty', 'notLoading'),
+	renderLoading: and('isEmpty', 'isLoading'),
 
 	contentView: computed({
 		get: function () {
