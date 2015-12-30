@@ -4,7 +4,8 @@ var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
 
-var LlamaBody = Em.ContainerView.extend({
+var LlamaBody = Em.Component.extend({
+	layoutName: 'components/llama-body',
 	classNames: ['llama-body'],
 	isEmpty: alias('root.isEmpty'),
 	isLoading: alias('root.isLoading'),
@@ -51,38 +52,38 @@ var LlamaBody = Em.ContainerView.extend({
 		}
 	}),
 
-	init: function () {
-		this._super();
-		this.pushObject(this.get('contentView'));
-	},
+	// init: function () {
+	// 	this._super();
+	// 	this.pushObject(this.get('contentView'));
+	// },
 
-	toggleSubcontent: on('init', observer('root.hasSubcontent', function () {
-		var hasSubcontent = this.get('root.hasSubcontent');
-		if (hasSubcontent) {
-			this.pushObject(this.get('subcontentView'));
-		}
-		else {
-			this.removeObject(this.get('subcontentView'));
-		}
-	})),
+	// toggleSubcontent: on('init', observer('root.hasSubcontent', function () {
+	// 	var hasSubcontent = this.get('root.hasSubcontent');
+	// 	if (hasSubcontent) {
+	// 		this.pushObject(this.get('subcontentView'));
+	// 	}
+	// 	else {
+	// 		this.removeObject(this.get('subcontentView'));
+	// 	}
+	// })),
 
-	toggleEmpty: on('init', observer('isEmpty', 'isLoading', function () {
-		var isEmpty = this.get('isEmpty');
-		var isLoading = this.get('isLoading');
-		var emptyView = this.get('emptyView');
-		var loadingView = this.get('loadingView');
-		if (!isEmpty) {
-			this.removeObjects([emptyView, loadingView]);
-		}
-		else if (isLoading) {
-			this.removeObject(emptyView);
-			this.pushObject(loadingView);
-		}
-		else {
-			this.removeObject(loadingView);
-			this.pushObject(emptyView);
-		}
-	}))
+	// toggleEmpty: on('init', observer('isEmpty', 'isLoading', function () {
+	// 	var isEmpty = this.get('isEmpty');
+	// 	var isLoading = this.get('isLoading');
+	// 	var emptyView = this.get('emptyView');
+	// 	var loadingView = this.get('loadingView');
+	// 	if (!isEmpty) {
+	// 		this.removeObjects([emptyView, loadingView]);
+	// 	}
+	// 	else if (isLoading) {
+	// 		this.removeObject(emptyView);
+	// 		this.pushObject(loadingView);
+	// 	}
+	// 	else {
+	// 		this.removeObject(loadingView);
+	// 		this.pushObject(emptyView);
+	// 	}
+	// }))
 });
 
 export default LlamaBody;
