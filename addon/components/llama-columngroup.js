@@ -9,7 +9,8 @@ var setDiff = computed.setDiff;
 var filterBy = computed.filterBy;
 var mapBy = computed.mapBy;
 
-var LlamaColumngroup = Em.CollectionView.extend({
+var LlamaColumngroup = Em.Component.extend({
+	layoutName: 'components/llama-columngroup',
 	classNames: 'llama-columngroup',
 	columnViews: alias('childViews'),
 	contentBinding: 'columns',
@@ -35,14 +36,14 @@ var LlamaColumngroup = Em.CollectionView.extend({
 		$columngroup.width(width);
 	})),
 
-	createChildView: function (View, attrs) {
-		var columns = this.get('columns');
-		var column = get(attrs, 'content');
-		set(attrs, 'root', this.get('root'));
-		set(attrs, 'columns', columns);
-		set(attrs, 'column', column);
-		return this._super(View, attrs);
-	}
+	// createChildView: function (View, attrs) {
+	// 	var columns = this.get('columns');
+	// 	var column = get(attrs, 'content');
+	// 	set(attrs, 'root', this.get('root'));
+	// 	set(attrs, 'columns', columns);
+	// 	set(attrs, 'column', column);
+	// 	return this._super(View, attrs);
+	// }
 });
 
 export default LlamaColumngroup;

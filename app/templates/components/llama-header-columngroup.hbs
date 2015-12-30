@@ -1,10 +1,9 @@
-{{#each rows as |row|}}
+{{#each columns as |column|}}
 	{{view itemViewClass
 		root=root
+		rows=rows
 		columns=columns
 		column=column
-		rows=rows
-		row=row
-		content=row
+		content=column
 	}}
 {{/each}}
