@@ -43,9 +43,11 @@
     "ember-cli-sri": "^1.2.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-data": "1.13.15",
+    "ember-disable-prototype-extensions": "^1.0.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
-    "ember-disable-prototype-extensions": "^1.0.0",
+    "ember-legacy-controllers": "git://github.com/emberjs/ember-legacy-controllers.git#59aeb196e44daa474e96bc11cd6318af1d2b6010",
+    "ember-legacy-views": "git://github.com/emberjs/ember-legacy-views.git#9ea87332a5c8077c388612fd01e505089ae7300b",
     "ember-try": "~0.0.8"
   },
   "dependencies": {

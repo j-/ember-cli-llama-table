@@ -1,7 +1,7 @@
 import Em from 'ember';
 import Row from 'llama-table/controllers/row';
 import ItemControllerFunctionMixin from 'llama-table/mixins/item-controller-function';
-var ArrayController = Em.ArrayController;
+import { ArrayController } from 'ember-legacy-controllers';
 
 /**
  * Array controller. Used to store data records.

@@ -14,7 +14,11 @@ var eq = computed.equal;
 var collect = computed.collect;
 var throttle = Em.run.throttle;
 
-var SortedController = Em.ArrayProxy.extend(Em.SortableMixin);
+var SortedController = Em.ArrayProxy.extend({
+	// content: null,
+	// sortProperties: null,
+	// arrangedContent: Em.computed.sort('content', 'sortProperties')
+});
 
 var SCROLL_INTERVAL = 1000 / 60; // 60 fps
 var SCROLL_IMMEDIATE = false; // invoke on trailing edge
@@ -72,8 +76,8 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 			return Columns.create({
 				parentController: this,
 				container: this.get('container'),
-				sortProperties: ['order'],
-				sortAscending: true,
+				// sortProperties: ['order'],
+				// sortAscending: true,
 				content: Em.A(this.get('columns'))
 			});
 		}
@@ -90,20 +94,20 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 			var options = {
 				parentController: this,
 				container: this.get('container'),
-				sortProperties: this.get('sortProperties'),
-				sortAscending: this.get('sortAscending'),
+				// sortProperties: this.get('sortProperties'),
+				// sortAscending: this.get('sortAscending'),
 				content: Em.A(this.get('rows'))
 			};
 			// if `sortFunction` is present it will be called
 			// even if the value itself is falsy and not a function
-			var sortFunction = this.get('config.sortFunction');
-			if (typeof sortFunction === 'function') {
-				options.sortFunction = sortFunction;
-			}
-			var orderBy = this.get('config.orderBy');
-			if (typeof orderBy === 'function') {
-				options.orderBy = orderBy;
-			}
+			// var sortFunction = this.get('config.sortFunction');
+			// if (typeof sortFunction === 'function') {
+			// 	options.sortFunction = sortFunction;
+			// }
+			// var orderBy = this.get('config.orderBy');
+			// if (typeof orderBy === 'function') {
+			// 	options.orderBy = orderBy;
+			// }
 			var Controller = SortedController;
 			if (this.get('hasSubcontent')) {
 				Controller = Rows;
