@@ -5,7 +5,8 @@ var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
 
-var LlamaFooter = Em.CollectionView.extend({
+var LlamaFooter = Em.Component.extend({
+	layoutName: 'components/llama-footer',
 	classNames: 'llama-footer',
 	itemViewClass: alias('root.FooterColumngroupView'),
 	columngroupViews: alias('childViews'),
