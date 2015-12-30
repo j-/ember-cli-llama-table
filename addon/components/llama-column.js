@@ -8,6 +8,7 @@ var computed = Em.computed;
 var alias = computed.alias;
 var bool = computed.bool;
 var not = computed.not;
+var filterBy = computed.filterBy;
 
 var LlamaColumn = Em.Component.extend({
 	layoutName: 'components/llama-column',
@@ -42,7 +43,7 @@ var LlamaColumn = Em.Component.extend({
 		$column.width(width);
 	})),
 
-	cellViews: alias('childViews'),
+	cellViews: filterBy('childViews', 'isVisible', true),
 
 	// createChildView: function (View, attrs) {
 	// 	var column = this.get('column');

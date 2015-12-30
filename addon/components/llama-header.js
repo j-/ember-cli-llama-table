@@ -3,12 +3,13 @@ var get = Em.get;
 var set = Em.set;
 var observer = Em.observer;
 var alias = Em.computed.alias;
+var filterBy = Em.computed.filterBy;
 
 var LlamaHeader = Em.Component.extend({
 	layoutName: 'components/llama-header',
 	classNames: 'llama-header',
 	itemViewClass: alias('root.HeaderColumngroupView'),
-	columngroupViews: alias('childViews'),
+	columngroupViews: filterBy('childViews', 'isVisible', true),
 	contentBinding: 'columngroups',
 	scrollTop: alias('root.scrollTop'),
 

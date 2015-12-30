@@ -6,6 +6,7 @@ var set = Em.set;
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
+var filterBy = computed.filterBy;
 var TAB = 9;
 var ENTER = 13;
 
@@ -15,7 +16,7 @@ var LlamaContent = Em.Component.extend(ArrowKeysMixin, {
 	attributeBindings: ['tabindex'],
 	tabindex: 0,
 	itemViewClass: alias('root.BodyColumngroupView'),
-	columngroupViews: alias('childViews'),
+	columngroupViews: filterBy('childViews', 'isVisible', true),
 
 	rows: null,
 	columngroups: null,

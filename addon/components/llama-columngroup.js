@@ -4,7 +4,6 @@ var set = Em.set;
 var on = Em.on;
 var observer = Em.observer;
 var computed = Em.computed;
-var alias = computed.alias;
 var setDiff = computed.setDiff;
 var filterBy = computed.filterBy;
 var mapBy = computed.mapBy;
@@ -12,7 +11,7 @@ var mapBy = computed.mapBy;
 var LlamaColumngroup = Em.Component.extend({
 	layoutName: 'components/llama-columngroup',
 	classNames: 'llama-columngroup',
-	columnViews: alias('childViews'),
+	columnViews: filterBy('childViews', 'isVisible', true),
 	contentBinding: 'columns',
 
 	columns: null,

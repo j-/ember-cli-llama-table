@@ -4,12 +4,13 @@ var set = Em.set;
 var observer = Em.observer;
 var computed = Em.computed;
 var alias = computed.alias;
+var filterBy = computed.filterBy;
 
 var LlamaFooter = Em.Component.extend({
 	layoutName: 'components/llama-footer',
 	classNames: 'llama-footer',
 	itemViewClass: alias('root.FooterColumngroupView'),
-	columngroupViews: alias('childViews'),
+	columngroupViews: filterBy('childViews', 'isVisible', true),
 	contentBinding: 'columngroups',
 	scrollTop: alias('root.scrollTop'),
 
