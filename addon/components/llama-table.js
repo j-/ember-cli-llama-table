@@ -76,8 +76,8 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 			return Columns.create({
 				parentController: this,
 				container: this.get('container'),
-				// sortProperties: ['order'],
-				// sortAscending: true,
+				sortProperties: ['order'],
+				sortAscending: true,
 				content: Em.A(this.get('columns'))
 			});
 		}
