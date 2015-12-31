@@ -37,7 +37,7 @@ var SCROLL_IMMEDIATE = false; // invoke on trailing edge
  */
 var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors, FocusPosition, {
 	classNames: ['llama-table-component'],
-	classNameBindings: ['isSortable', 'isResizable', 'isEmpty', 'isLoading', 'hasSubcontent', 'showHeader', 'showFooter'],
+	classNameBindings: ['isSortable', 'isResizable', 'datasetIsEmpty:is-empty', 'isLoading', 'hasSubcontent', 'showHeader', 'showFooter'],
 
 	/**
 	 * Column definitions array
@@ -140,9 +140,9 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 
 	/**
 	 * Table is empty when there are no rows
-	 * @property {Boolean} isEmpty
+	 * @property {Boolean} datasetIsEmpty
 	 */
-	isEmpty: eq('rows.length', 0),
+	datasetIsEmpty: eq('rows.length', 0),
 
 	/**
 	 * Can show a loading state.
