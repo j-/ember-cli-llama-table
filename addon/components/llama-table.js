@@ -433,11 +433,9 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 		},
 		sortBy: function (column) {
 			var sortProperties = this.get('sortProperties');
-			if (Em.isArray(sortProperties) && column === sortProperties[0]) {
-				this.toggleProperty('sortAscending');
-			}
-			else {
-				this.set('sortAscending', true);
+			var sortProperty = Em.makeArray(sortProperties)[0];
+			if (columnNamesMatch(column, sortProperty)) {
+				column = toggleColumnDescending(sortProperty);
 			}
 			this.set('sortProperties', [column]);
 		},
@@ -471,5 +469,42 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 		}
 	}
 });
+
+/**
+ * Matches sort definition. Has two groups: 1) column name, and 2) optional
+ *   `:desc` indicating a descending order sort.
+ * @private
+ * @type RegExp
+ */
+var columnNameExp = /^(.*?)(\:desc)?$/;
+
+/**
+ * Determines if two column names are the same, ignoring any trailing `:desc`.
+ * @private
+ * @method columnNamesMatch
+ * @param {String} left Column name, possibly ending in `:desc`.
+ * @param {String} right Column name, possibly ending in `:desc`.
+ * @return {Boolean} True if both column names are the same string.
+ */
+function columnNamesMatch (left, right) {
+	var matchLeft = String(left || '').match(columnNameExp);
+	var matchRight = String(right || '').match(columnNameExp);
+	return matchLeft && matchRight && matchLeft[1] === matchRight[1];
+}
+
+/**
+ * Returns a column name with or without a trailing `:desc`, depending on if it
+ *   already has one. Toggles the descending state of that column.
+ * @private
+ * @method toggleColumnDescending
+ * @param {String} column Column name, possibly ending in `:desc`
+ * @return {String} New column name, possibly ending in `:desc`
+ */
+function toggleColumnDescending (column) {
+	var columnMatch = String(column || '').match(columnNameExp);
+	var columnName = columnMatch[1];
+	var isDescending = columnMatch[2] !== undefined;
+	return isDescending ? columnName : columnName + ':desc';
+}
 
 export default LlamaTable;
