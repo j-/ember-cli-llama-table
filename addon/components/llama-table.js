@@ -440,10 +440,10 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 			this.set('sortProperties', [column]);
 		},
 		stopHighlightingRows: function () {
-			this.stopHighlightingRows();
+			// this.stopHighlightingRows();
 		},
 		highlightRow: function (row) {
-			this.highlightRow(row);
+			// this.highlightRow(row);
 		},
 		tabKey: function () {
 			this.send('focusRight');
