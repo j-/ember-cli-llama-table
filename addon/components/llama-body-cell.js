@@ -37,9 +37,9 @@ var LlamaBodyCell = LlamaCell.extend({
 	value: alias('cell'),
 	formatted: alias('value'),
 
-	hover: computed('root.hoverRow', 'row', {
+	hover: computed('root.hoverRow', 'row', 'isFooter', {
 		get: function () {
-			return this.get('root.hoverRow') === this.get('row');
+			return !this.get('isFooter') && this.get('root.hoverRow') === this.get('row');
 		}
 	}),
 
