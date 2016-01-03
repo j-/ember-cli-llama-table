@@ -5,7 +5,7 @@ var RowHeightsController = Em.Controller.extend({
 		{ name: 'height', label: 'Row height (px)' }
 	],
 
-	tableData: [],
+	tableData: Em.A(),
 
 	numRows: 10,
 	maxHeight: 400,
