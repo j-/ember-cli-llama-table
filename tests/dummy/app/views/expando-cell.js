@@ -2,7 +2,7 @@ import Em from 'ember';
 import LlamaBodyCell from 'llama-table/components/llama-body-cell';
 
 var ExpandoCell = LlamaBodyCell.extend({
-	templateName: 'expando-cell',
+	layoutName: 'expando-cell',
 	classNames: 'no-padding',
 	isExpanded: Em.computed.alias('content.isExpanded'),
 	actions: {

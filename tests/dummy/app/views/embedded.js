@@ -1,7 +1,7 @@
 import Em from 'ember';
 
-var EmbeddedView = Em.View.extend({
-	templateName: 'embedded',
+var EmbeddedView = Em.Component.extend({
+	layoutName: 'embedded',
 	tableColumns: [
 		{
 			name: 'foo',
@@ -35,7 +35,7 @@ var EmbeddedView = Em.View.extend({
 		var $el = this.$();
 		if ($el) {
 			var height = $el.outerHeight();
-			this.set('content.subcontentHeight', height + 20);
+			this.set('subcontentHeight', height + 20);
 		}
 	}
 });
