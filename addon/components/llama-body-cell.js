@@ -20,7 +20,6 @@ var LlamaBodyCell = LlamaCell.extend({
 	classNames: 'llama-body-cell',
 	classNameBindings: ['hover', 'columnIsClickable', 'rowIsClickable', 'isClickable', 'isEmpty', 'showingSubcontent', 'isEditable'],
 	attributeBindings: ['tabindex'],
-	hover: false,
 	height: alias('row.height'),
 	columnIsClickable: alias('column.isClickable'),
 	rowIsBody: not('isFooter'),
@@ -37,6 +36,12 @@ var LlamaBodyCell = LlamaCell.extend({
 	cell: null,
 	value: alias('cell'),
 	formatted: alias('value'),
+
+	hover: computed('root.hoverRow', 'row', {
+		get: function () {
+			return this.get('root.hoverRow') === this.get('row');
+		}
+	}),
 
 	tabindex: computed('isEditable', {
 		get: function () {

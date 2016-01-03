@@ -117,6 +117,12 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 	}),
 
 	/**
+	 * Reference to the currently hovered row. Used to highlight rows.
+	 * @property {Object} hoverRow
+	 */
+	hoverRow: null,
+
+	/**
 	 * Maximum height of table before introducing vertical scrollbars.
 	 * @property {Number} maxHeight
 	 */
@@ -360,54 +366,6 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 	},
 
 	/**
-	 * Highlights the cells representing the given row.
-	 * @method highlightRow
-	 * @param {Object} row Row object to highlight
-	 */
-	highlightRow: function (row) {
-		var rows = this.get('sortedRows.arrangedContent');
-		var index = rows.indexOf(row);
-		if (index === -1) {
-			row = get(row, 'model') || get(row, 'content');
-			if (!Em.isBlank(row)) {
-				index = rows.indexOf(row);
-			}
-		}
-		this.highlightRowIndex(index);
-	},
-
-	/**
-	 * Highlights the cells at the given 0-based row index.
-	 * @method highlightRowIndex
-	 * @param {Number} index Row index to highlight (0-based)
-	 */
-	highlightRowIndex: function (index) {
-		var bodyColumngroupViews = this.get('bodyColumngroupViews');
-		bodyColumngroupViews.forEach(function (columngroupView) {
-			var columnViews = columngroupView.get('columnViews');
-			columnViews.forEach(function (columnView) {
-				var toHover;
-				var cellViews = columnView.get('cellViews');
-				cellViews = Em.makeArray(cellViews);
-				cellViews = Em.A(cellViews);
-				cellViews.setEach('hover', false);
-				toHover = cellViews.objectAt(index);
-				if (toHover) {
-					toHover.set('hover', true);
-				}
-			});
-		});
-	},
-
-	/**
-	 * Remove highlighting from all rows.
-	 * @method stopHighlightingRows
-	 */
-	stopHighlightingRows: function () {
-		this.highlightRowIndex(-1);
-	},
-
-	/**
 	 * Find the current scroll position of the table and synchronize with all
 	 *   views watching this position.
 	 * @method syncScroll
@@ -440,10 +398,10 @@ var LlamaTable = Em.Component.extend(ResizeColumns, CellTypes, ViewConstructors,
 			this.set('sortProperties', [column]);
 		},
 		stopHighlightingRows: function () {
-			// this.stopHighlightingRows();
+			this.set('hoverRow', null);
 		},
 		highlightRow: function (row) {
-			// this.highlightRow(row);
+			this.set('hoverRow', row);
 		},
 		tabKey: function () {
 			this.send('focusRight');
