@@ -47,12 +47,11 @@
     "ember-disable-prototype-extensions": "^1.0.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
-    "ember-legacy-controllers": "git://github.com/emberjs/ember-legacy-controllers.git#59aeb196e44daa474e96bc11cd6318af1d2b6010",
-    "ember-legacy-views": "git://github.com/emberjs/ember-legacy-views.git#9ea87332a5c8077c388612fd01e505089ae7300b",
     "ember-try": "~0.0.8"
   },
   "dependencies": {
-    "ember-cli-babel": "^5.1.5"
+    "ember-cli-babel": "^5.1.5",
+    "ember-legacy-controllers": "0.0.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
